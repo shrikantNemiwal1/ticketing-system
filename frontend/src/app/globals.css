@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Custom scrollbar utility */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* TailAdmin theme shadow utilities */
+.shadow-theme-xs {
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+}
+
+.shadow-theme-lg {
+  box-shadow: 0 10px 15px -3px rgba(16, 24, 40, 0.1), 0 4px 6px -2px rgba(16, 24, 40, 0.05);
+}
+
+/* TailAdmin text utilities */
+.text-theme-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-theme-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/* Table horizontal scroll for mobile */
+.table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  position: relative;
+  overflow-x: auto;
+}
+
+@media (max-width: 639px) {
+  .table-scroll {
+    /* Mobile: Account for layout padding (8px) + container padding (4px) + container margin (8px) = 32px total horizontal */
+    max-width: calc(100vw - 32px);
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .table-scroll {
+    /* Tablet: Account for layout padding (24px) + container padding (24px) = 96px total horizontal */
+    max-width: calc(100vw - 96px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .table-scroll {
+    /* Desktop: No constraint needed */
+    max-width: none;
+  }
+}
+
+.table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 3px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.7);
+}
+
+/* Mobile scroll fade indicator */
+@media (max-width: 1023px) {
+  .table-scroll::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8));
+    pointer-events: none;
+  }
+  
+  .dark .table-scroll::after {
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+  }
+}
